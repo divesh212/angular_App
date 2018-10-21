@@ -5,3 +5,10 @@
   </div>
 </div>
 
+<div class="container comments text-center">
+  <textarea #commentField cols="70" rows="5"></textarea><br>
+  <button class="btn primary-btn" (click) = postComment(commentField.value)>Post Comment</button>
+</div>
+ <div class="container comments text-center" *ngIf="comment">
+  {{ comment }}
+</div>
