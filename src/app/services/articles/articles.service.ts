@@ -41,4 +41,14 @@ export class ArticlesService {
     
   }
 
+  getArticleDetails(slug: string){
+    return this.http.get(this.urlForGlobalFeed+"/"+slug);
+  }
+   getComments(slug : string) {
+
+   }
+   postComments(comment : string,slug:string) {
+     
+   }
+
 }
