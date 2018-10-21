@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../services/articles/articles.service';
-
+import { TagsService } from '../services/tag/tags.service'
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
@@ -8,13 +8,26 @@ import { ArticlesService } from '../services/articles/articles.service';
 })
 export class ArticlesComponent implements OnInit {
 
-  constructor(private articleService: ArticlesService) { }
+  tagName : string
+  loadedTagBtn : boolean
+
+  constructor(private articleService: ArticlesService, private tagService: TagsService) { }
 
   ngOnInit() {
+    this.tagService.getTagName().subscribe((tagName) => {
+      this.tagName = tagName;
+    })
+
   }
 
-  getGlobalFeeds(){
-    this.articleService.setGlobalFeed();
+  getTagName() {
+    this.loadedTagBtn = true;
+    return this.tagService.getTagName()
   }
+  
+   getFeed(feedSource){
+    feedSource=='user'? this.articleService.setUserFeed() : this.articleService.setGlobalFeed();
+    this.tagService.setTagName(null);
+   }
 
 }

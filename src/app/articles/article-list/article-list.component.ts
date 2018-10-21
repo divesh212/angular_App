@@ -14,7 +14,6 @@ export class ArticleListComponent implements OnInit {
   ngOnInit() {
     this.articleService.getFeed().subscribe((a: {articles: any, articlesCount: any}) => {
       this.articles = a.articles;
-      console.log(this.articles);
     })
     this.articleService.setGlobalFeed();
   }

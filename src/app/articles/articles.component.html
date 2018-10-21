@@ -1,4 +1,6 @@
-<p>
-    <button (click)="getGlobalFeeds()">Global Feeds</button>  
-  <app-article-list></app-article-list>
-</p>
+<div>
+  <button class="btn" (click)="getFeed('user')">Your Feed</button>
+  <button class="btn" (click)="getFeed('global')">Global Feed</button>
+  <button class="btn" *ngIf="tagName">{{ tagName }}</button>
+</div><hr>
+<app-article-list></app-article-list>

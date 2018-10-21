@@ -9,11 +9,13 @@ export class ArticlesService {
 
   urlForGlobalFeed : string
   urlForTagFeed : string 
-  articles = new Subject<any>()
+  articles = new Subject()
+  baseUrl: string
 
   constructor(private http: HttpClient) { 
-    this.urlForGlobalFeed = "https://conduit.productionready.io/api/articles"
-    this.urlForTagFeed = "https://conduit.productionready.io/api/articles?tag="
+    this.baseUrl = "https://conduit.productionready.io/api/articles/"
+    this.urlForGlobalFeed = this.baseUrl
+    this.urlForTagFeed = this.baseUrl +"?tag="
   }
 
   getFeed() {
@@ -33,6 +35,10 @@ export class ArticlesService {
     this.http.get(url).subscribe((data) => {
       this.articles.next(data)
    })
+  }
+
+  setUserFeed(){
+    
   }
 
 }
