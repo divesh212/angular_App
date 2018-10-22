@@ -10,6 +10,7 @@ export class ArticlesComponent implements OnInit {
 
   tagName : string
   loadedTagBtn : boolean
+  localStorageObj : Object
 
   constructor(private articleService: ArticlesService, private tagService: TagsService) { }
 
@@ -17,7 +18,7 @@ export class ArticlesComponent implements OnInit {
     this.tagService.getTagName().subscribe((tagName) => {
       this.tagName = tagName;
     })
-
+    this.localStorageObj = localStorage
   }
 
   getTagName() {
