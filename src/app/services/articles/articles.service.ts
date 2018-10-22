@@ -83,4 +83,28 @@ export class ArticlesService {
     return this.http.delete(url, httpOptions)
   }
 
+  createArticle(article : any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'authorization': 'Token '+ localStorage.getItem('token')
+      })
+    };
+    const body = {
+      article: article
+    }
+    return this.http.post(this.baseUrl,body,httpOptions)
+  }
+
+  updateArticle(article : any, slug: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'authorization': 'Token '+ localStorage.getItem('token')
+      })
+    };
+    const body = {
+      article: article
+    }
+    return this.http.put(this.baseUrl+slug,body,httpOptions)
+  }
+
 }
