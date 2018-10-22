@@ -107,4 +107,11 @@ export class ArticlesService {
     return this.http.put(this.baseUrl+slug,body,httpOptions)
   }
 
+  setMyArticles(author: string) {
+    const url = "https://conduit.productionready.io/api/articles?author="+author
+    this.http.get(url).subscribe((data) => {
+      this.articles.next(data)
+    })
+  }
+
 }

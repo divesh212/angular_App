@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ArticlesService } from '../services/articles/articles.service';
 import { TagsService } from '../services/tag/tags.service'
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
@@ -8,11 +9,13 @@ import { TagsService } from '../services/tag/tags.service'
 })
 export class ArticlesComponent implements OnInit {
 
-  tagName : string
-  loadedTagBtn : boolean
-  localStorageObj : Object
+  tagName: string
+  loadedTagBtn: boolean
+  localStorageObj: Object
+  @Input() parent: string
 
-  constructor(private articleService: ArticlesService, private tagService: TagsService) { }
+  constructor(private articleService: ArticlesService, private tagService: TagsService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.tagService.getTagName().subscribe((tagName) => {
@@ -25,10 +28,21 @@ export class ArticlesComponent implements OnInit {
     this.loadedTagBtn = true;
     return this.tagService.getTagName()
   }
-  
-   getFeed(feedSource){
-    feedSource=='user'? this.articleService.setUserFeed() : this.articleService.setGlobalFeed();
+
+  getFeed(feedSource) {
+    if (feedSource === 'user') {
+      this.articleService.setUserFeed()
+    } else if (feedSource === 'global') {
+      this.articleService.setGlobalFeed()
+    } else if (feedSource === 'myFeed') {
+      this.route.paramMap.subscribe(
+        params => {
+          this.articleService.setMyArticles(params['params'].username)
+        })
+    } else if (feedSource === 'favourite') {
+      this.articleService.setGlobalFeed()
+    }
     this.tagService.setTagName(null);
-   }
+  }
 
 }

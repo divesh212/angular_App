@@ -8,7 +8,7 @@
       <li class="nav-item"><a routerLink='/signup' class="nav-link" *ngIf="!username">Signup</a></li>
       <li class="nav-item"><a routerLink='/signup' class="nav-link" routerLink='/newarticle' (click)="addNewArticle()" *ngIf="username">New Article</a></li>
       <li class="nav-item"><a (click)='logout()' class="nav-link" *ngIf="username">Logout</a></li>
-      <li class="nav-item"><a routerLink='/signup' class="nav-link" *ngIf="username">{{ username }}</a></li>
+      <li class="nav-item"><a [routerLink]="['/profile',username]" class="nav-link" *ngIf="username">{{ username }}</a></li>
     </ul>
   </div>
 </nav>

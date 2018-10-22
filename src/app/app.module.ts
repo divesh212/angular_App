@@ -14,13 +14,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { NewArticlesComponent } from './new-articles/new-articles.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'article/:slug', component: ArticleDetailComponent},
   {path : 'signup', component: SignupComponent},
   {path : 'signin', component: SigninComponent},
-  {path : 'newarticle', component: NewArticlesComponent}
+  {path : 'newarticle', component: NewArticlesComponent},
+  {path: 'profile/:username', component: ProfileComponent}
 ]
 
 @NgModule({
@@ -35,7 +37,8 @@ const routes: Routes = [
     SigninComponent,
     SignupComponent,
     HomeComponent,
-    NewArticlesComponent
+    NewArticlesComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

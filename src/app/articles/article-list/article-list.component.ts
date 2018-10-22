@@ -15,11 +15,6 @@ export class ArticleListComponent implements OnInit {
     this.articleService.getFeed().subscribe((a: {articles: any, articlesCount: any}) => {
       this.articles = a.articles;
     })
-    if(localStorage.getItem('token')!=null){
-      this.articleService.setUserFeed()
-    }else{
-      this.articleService.setGlobalFeed()
-    }
   }
 
 
