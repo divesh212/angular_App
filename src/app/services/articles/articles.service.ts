@@ -114,4 +114,40 @@ export class ArticlesService {
     })
   }
 
+  deleteArticle(slug:string){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'authorization': 'Token '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.delete(this.baseUrl+slug,httpOptions)
+  }
+
+  setFavouriteFeed(author: string){
+    const url = "https://conduit.productionready.io/api/articles?favorited="+author
+    this.http.get(url).subscribe((data) => {
+      this.articles.next(data)
+    })
+  }
+
+  favouriteArticle(slug:string) {
+    const url = "https://conduit.productionready.io/api/articles/" + slug + "/favorite"
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'authorization': 'Token '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.post(url,null,httpOptions)
+  }
+
+  unFavouriteArticle(slug:string){
+    const url = "https://conduit.productionready.io/api/articles/" + slug + "/favorite"
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'authorization': 'Token '+ localStorage.getItem('token')
+      })
+    };
+    return this.http.delete(url,httpOptions)
+  }
+
 }

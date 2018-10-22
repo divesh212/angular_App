@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from 'src/app/services/articles/articles.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -17,7 +17,7 @@ export class ArticleDetailComponent implements OnInit {
   currentUser: string
 
   constructor(private route: ActivatedRoute, private articleService: ArticlesService,
-              private userService: UserService) { }
+              private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.isUserLoggedIn = localStorage.getItem('token')?true:false
@@ -25,8 +25,12 @@ export class ArticleDetailComponent implements OnInit {
     this.route.paramMap.subscribe(
       params => {
         this.slug = params['params'].slug
-        this.articleService.getArticleDetails(this.slug).subscribe((data : any) => {
+        this.articleService.getArticleDetails(this.slug)
+        .subscribe(
+          (data : any) => {
         this.articleData = data.article;
+        },error => {
+          this.router.navigate(['/']);
         })
       }
     )
@@ -55,5 +59,11 @@ export class ArticleDetailComponent implements OnInit {
   deleteComment(id:number) {
     this.articleService.deleteComment(this.slug,id).subscribe((data) => this.getAllComments())
   }
-
+  
+  deleteArticle(){
+    this.articleService.deleteArticle(this.slug).subscribe((data) => {
+      console.log(data);
+      this.router.navigate([`/profile/${this.articleData.author.username}`])
+    })
+  }
 }

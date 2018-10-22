@@ -4,13 +4,39 @@
 }
 
 .logo {
-padding-top:1.5rem;
-color : white; 
-}
-h4{
-color:white;
+    padding-top:1.5rem;
+    color : white; 
 }
 
-comments {
+h5{
+    display: inline;
+}
+
+img {
+    display: inline;
+}
+.comments {
     padding-top: 100px;
+    max-width: 500px;
+}
+
+.comment {
+    width: 35rem;
+    margin-left:30.5%;
+}
+
+.crudBtn {
+    display: inline;
+}
+
+.articleBody {
+    padding-top: 30px;
+}
+
+.showBlack {
+    color : black;
+}
+
+.showWhite {
+    color: white;
 }

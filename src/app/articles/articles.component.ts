@@ -14,6 +14,7 @@ export class ArticlesComponent implements OnInit {
   localStorageObj: Object
   @Input() parent: string
 
+
   constructor(private articleService: ArticlesService, private tagService: TagsService,
     private route: ActivatedRoute) { }
 
@@ -40,7 +41,7 @@ export class ArticlesComponent implements OnInit {
           this.articleService.setMyArticles(params['params'].username)
         })
     } else if (feedSource === 'favourite') {
-      this.articleService.setGlobalFeed()
+      this.articleService.setFavouriteFeed(this.route.snapshot.paramMap.get('username'))
     }
     this.tagService.setTagName(null);
   }
